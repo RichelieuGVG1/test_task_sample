@@ -1,0 +1,112 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/search/": {
+      "post": {
+        "summary": "Search Documents",
+        "operationId": "search_documents_search__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Document"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete/{doc_id}": {
+      "delete": {
+        "summary": "Delete Document",
+        "operationId": "delete_document_delete__delete",
+        "parameters": [
+          {
+            "name": "doc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Doc Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SearchQuery": {
+        "title": "SearchQuery",
+        "required": ["query"],
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          }
+        }
+      },
+      "Document": {
+        "title": "Document",
+        "required": ["id", "text", "rubrics", "created_date"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "rubrics": {
+            "title": "Rubrics",
+            "type": "string"
+          },
+          "created_date": {
+            "title": "Created Date",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

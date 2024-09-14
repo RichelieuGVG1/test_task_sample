@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+elasticsearch
+sqlalchemy
+psycopg2
+pandas

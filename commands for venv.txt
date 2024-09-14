@@ -1,0 +1,5 @@
+python -m venv venv
+venv\Scripts\activate.bat
+pip install fastapi uvicorn elasticsearch sqlalchemy psycopg2 pandas fastapi uvicorn elasticsearch sqlalchemy pandas
+
+"C:\Program Files\Docker\Docker\DockerCli.exe" -SwitchDaemon

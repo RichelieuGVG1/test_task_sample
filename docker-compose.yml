@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - elasticsearch
+    environment:
+      DATABASE_URL: postgresql://localhost:postgres@db:5432/postgres
+
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  elasticsearch:
+    image: elasticsearch:8.4.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+
+volumes:
+  pgdata:
